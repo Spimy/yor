@@ -2,6 +2,7 @@ import Collection from '@discordjs/collection';
 import { CommandData, BaseCommand } from './command';
 
 class CommandStore {
+  private prefix: string = '!';
   private commands: Collection<string, CommandData> = new Collection();
   private aliases: Collection<string, string> = new Collection();
 
@@ -11,6 +12,14 @@ class CommandStore {
 
   get $aliases() {
     return this.aliases;
+  }
+
+  get $prefix() {
+    return this.prefix;
+  }
+
+  set $prefix(prefix: string) {
+    this.prefix = prefix;
   }
 
   public addCommand(target: { new (): BaseCommand }) {
