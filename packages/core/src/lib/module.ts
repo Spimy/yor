@@ -1,7 +1,7 @@
 import { MuseClient } from '../client';
 
 export interface ModuleWithArgument {
-  module: typeof BaseModule;
+  module: ThisType<typeof BaseModule>;
   args: any[];
 }
 
@@ -17,11 +17,4 @@ export interface BaseModule {
 
 export abstract class BaseModule {
   constructor(protected client: MuseClient) {}
-
-  static initialiseWithArguments(args: any[]): ModuleWithArgument {
-    return {
-      module: this,
-      args,
-    };
-  }
 }
