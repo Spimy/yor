@@ -1,0 +1,24 @@
+{
+  "name": "@muse/core",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.js",
+  "files": [
+    "/dist"
+  ],
+  "license": "MIT",
+  "author": "Spimy",
+  "scripts": {
+    "build": "rm -f dist && tsc",
+    "dev": "tsc -w"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.2.0",
+    "@types/node": "^16.11.11",
+    "typescript": "^4.5.2"
+  },
+  "dependencies": {
+    "discord.js": "^13.3.1",
+    "glob": "^7.2.0"
+  }
+}
