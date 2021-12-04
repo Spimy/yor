@@ -11,6 +11,10 @@ export interface ModuleConstructor {
   new (client: MuseClient, args?: any[]): BaseModule;
 }
 
+export interface BaseModule {
+  create?(args: any | any[]): ModuleWithArgument;
+}
+
 export abstract class BaseModule {
   constructor(protected client: MuseClient) {}
 
