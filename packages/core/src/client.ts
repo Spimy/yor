@@ -49,12 +49,9 @@ export class MuseClient extends Client {
 
     this.modules.forEach((module) => {
       if ('module' in module) {
-        new (module.module as unknown as ModuleConstructor)(
-          this,
-          ...module.args
-        );
+        new (module.module as ModuleConstructor)(this, ...module.args);
       } else {
-        new (module as unknown as ModuleConstructor)(this);
+        new (module as ModuleConstructor)(this);
       }
     });
   }
