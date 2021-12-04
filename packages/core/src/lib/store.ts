@@ -5,19 +5,19 @@ class CommandStore {
   private commands: Collection<string, CommandData> = new Collection();
   private aliases: Collection<string, string> = new Collection();
 
-  public getCommands() {
+  get $commands() {
     return this.commands;
   }
 
-  public getAliases() {
+  get $aliases() {
     return this.aliases;
   }
 
   public addCommand(target: { new (): BaseCommand }) {
     const command = new target();
-    const commandInfo = command.getInfo();
+    const commandInfo = command.$info;
 
-    this.commands.set(command.getInfo().name, {
+    this.commands.set(commandInfo.name, {
       ...commandInfo,
       execute: command.execute,
     });

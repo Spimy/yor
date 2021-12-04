@@ -17,7 +17,7 @@ export abstract class BaseCommand {
 
   abstract execute(message: Message): Promise<void>;
 
-  public getInfo(): CommandInfo {
+  get $info(): CommandInfo {
     return { ...this.info };
   }
 }
