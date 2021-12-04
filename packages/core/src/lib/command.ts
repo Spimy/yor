@@ -9,7 +9,7 @@ export interface CommandInfo {
 }
 
 export interface CommandData extends CommandInfo {
-  execute?: (message: Message) => Promise<void>;
+  execute?: (message: Message, args?: string[]) => Promise<void>;
 }
 
 export abstract class BaseCommand {
