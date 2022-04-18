@@ -13,3 +13,4 @@ export {
   BaseCommand
 } from './lib/handlers/command';
 export { Event, BaseEvent } from './lib/handlers/event';
+export * from 'discord.js';
