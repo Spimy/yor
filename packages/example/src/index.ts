@@ -1,6 +1,7 @@
 require('dotenv').config();
 import { MuseClient } from '@muse/core';
 import { CommandExecutor } from '@muse/commands';
+import { ModuleCommand } from '@muse/external';
 
 async function bootstrap() {
   const client = new MuseClient({
@@ -8,12 +9,12 @@ async function bootstrap() {
     root: __dirname,
     modules: [
       CommandExecutor.create({
-        type: 'classic',
+        type: 'classic'
       }),
+      ModuleCommand
     ],
+    debug: true
   });
   await client.login(process.env.TOKEN);
-
-  client.on('ready', () => console.log('Ready'));
 }
 bootstrap();
