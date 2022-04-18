@@ -17,6 +17,6 @@
     "typescript": "^4.5.2"
   },
   "dependencies": {
-    "@muse/core": "1.0.0"
+    "@muse/core": "^1.0.0"
   }
 }
