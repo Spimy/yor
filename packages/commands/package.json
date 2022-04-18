@@ -7,8 +7,9 @@
     "/dist"
   ],
   "license": "MIT",
+  "author": "Spimy",
   "scripts": {
-    "build": "rm -f dist && tsc",
+    "build": "rm -rf -f dist && tsc",
     "dev": "tsc -w"
   },
   "devDependencies": {
