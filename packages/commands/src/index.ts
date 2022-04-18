@@ -3,9 +3,9 @@ import {
   Store,
   ModuleWithArgument,
   Event,
-  BaseEvent
+  BaseEvent,
+  Message
 } from '@yor/core';
-import { Message } from 'discord.js';
 
 export type CommandType = 'classic';
 

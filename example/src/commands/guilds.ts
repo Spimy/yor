@@ -1,5 +1,4 @@
-import { Command, BaseCommand, Store } from '@yor/core';
-import { Message } from 'discord.js';
+import { Command, BaseCommand, Store, Message } from '@yor/core';
 
 @Command()
 export default class extends BaseCommand {
