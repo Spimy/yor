@@ -6,8 +6,8 @@ export default class extends BaseCommand {
   constructor() {
     super({
       name: 'test',
-      aliases: ['t'],
-      description: 'A test command that simply sends test back to the user.',
+      aliases: ['t', 'te'],
+      description: 'A test command that simply sends test back to the user.'
     });
   }
 
