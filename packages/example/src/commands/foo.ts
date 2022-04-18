@@ -5,7 +5,7 @@ import { Message } from 'discord.js';
 export default class extends BaseCommand {
   constructor() {
     super({
-      name: 'foo',
+      name: 'foo'
     });
   }
 
