@@ -6,4 +6,10 @@ export {
   Module,
   ModuleConstructor,
 } from './lib/module';
-export { Command, CommandInfo, CommandData, BaseCommand } from './lib/command';
+export {
+  Command,
+  CommandInfo,
+  CommandData,
+  BaseCommand,
+} from './lib/handlers/command';
+export { Event, BaseEvent } from './lib/handlers/event';
