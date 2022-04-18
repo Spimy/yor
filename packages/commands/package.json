@@ -1,6 +1,6 @@
 {
   "name": "@yor/commands",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/index.js",
   "types": "dist/index.d.js",
   "files": [
@@ -8,6 +8,14 @@
   ],
   "license": "MIT",
   "author": "Spimy",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Spimy/yor.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Spimy/yor/issues"
+  },
+  "homepage": "https://github.com/Spimy/yor/tree/main/packages/commands#readme",
   "scripts": {
     "build": "rm -rf -f dist && tsc",
     "dev": "tsc -w"
@@ -19,5 +27,16 @@
   "dependencies": {
     "@yor/core": "^1.0.0"
   },
+  "keywords": [
+    "nodejs",
+    "yor",
+    "discord.js",
+    "discord-js-bot",
+    "discord",
+    "bot",
+    "command",
+    "handler",
+    "boilerplate"
+  ],
   "gitHead": "5737b78669657a7fdf11eba1bbecf203a674fbfe"
 }
