@@ -1,10 +1,20 @@
-import Collection from '@discordjs/collection';
-import { CommandData, BaseCommand } from './command';
+import { Collection } from 'discord.js';
+import { CommandData, BaseCommand } from './handlers/command';
+import { MuseClient } from '../client';
 
-class CommandStore {
+class GlobalStore {
+  private client: MuseClient;
   private prefix: string = '!';
   private commands: Collection<string, CommandData> = new Collection();
   private aliases: Collection<string, string> = new Collection();
+
+  get $client() {
+    return this.client;
+  }
+
+  set $client(client: MuseClient) {
+    this.client = client;
+  }
 
   get $commands() {
     return this.commands;
@@ -28,17 +38,24 @@ class CommandStore {
 
     this.commands.set(commandInfo.name, {
       ...commandInfo,
-      execute: command.execute,
+      execute: command.execute
     });
 
     commandInfo.aliases?.forEach((alias) => {
       this.aliases.set(alias, commandInfo.name);
     });
+
+    if (Store.$client.$debug)
+      console.log(
+        `Loaded command: ${commandInfo.name}.${
+          commandInfo.aliases ? ` Aliases: [${commandInfo.aliases}]` : ''
+        }`
+      );
   }
 
-  public getCommand(name: string) {
+  public getCommand(name: string): CommandData | undefined {
     return this.commands.get(name) || this.commands.get(this.aliases.get(name));
   }
 }
 
-export const Store = new CommandStore();
+export const Store = new GlobalStore();
