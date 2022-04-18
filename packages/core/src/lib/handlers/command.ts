@@ -1,5 +1,5 @@
 import { Store } from '../store';
-import { Message, PermissionResolvable } from '../../index';
+import { Message, PermissionResolvable } from 'discord.js';
 
 export interface CommandInfo {
   name: string;
@@ -9,13 +9,13 @@ export interface CommandInfo {
 }
 
 export interface CommandData extends CommandInfo {
-  execute?: (message: Message, args?: string[]) => Promise<void>;
+  execute: (message: Message, args?: string[]) => Promise<void>;
 }
 
 export abstract class BaseCommand {
   constructor(private info: CommandInfo) {}
 
-  abstract execute(message: Message): Promise<void>;
+  abstract execute(message: Message, args?: string[]): Promise<void>;
 
   get $info(): CommandInfo {
     return this.info;
@@ -23,5 +23,7 @@ export abstract class BaseCommand {
 }
 
 export function Command() {
-  return (target: { new (): BaseCommand }) => Store.addCommand(target);
+  return (target: { new (): BaseCommand }) => {
+    Store.addCommand(target);
+  };
 }

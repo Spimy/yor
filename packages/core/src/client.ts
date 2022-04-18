@@ -1,4 +1,4 @@
-import { Client, ClientOptions } from './index';
+import { Client, ClientOptions } from 'discord.js';
 import { Module, ModuleConstructor } from './lib/module';
 import { Store } from './lib/store';
 

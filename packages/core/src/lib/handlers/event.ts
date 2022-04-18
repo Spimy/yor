@@ -1,4 +1,4 @@
-import { ClientEvents } from '../../index';
+import { ClientEvents } from 'discord.js';
 import { Store } from '../store';
 
 export abstract class BaseEvent {
