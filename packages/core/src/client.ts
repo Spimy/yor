@@ -1,5 +1,7 @@
 import { Client, ClientOptions } from 'discord.js';
 import { Module, ModuleConstructor } from './lib/module';
+import { Store } from './lib/store';
+
 import path from 'path';
 import glob from 'glob';
 
@@ -10,6 +12,7 @@ export interface MuseClientOptions extends ClientOptions {
   commandsFolder?: string;
   eventsFolder?: string;
   modules?: Module[];
+  debug?: boolean;
 }
 
 export class MuseClient extends Client {
@@ -17,6 +20,7 @@ export class MuseClient extends Client {
   private commandsFolder: string;
   private eventsFolder: string;
   private modules: Module[];
+  private debug: boolean;
 
   constructor(options: MuseClientOptions) {
     super(options);
@@ -25,6 +29,9 @@ export class MuseClient extends Client {
     this.commandsFolder = options.commandsFolder || 'commands';
     this.eventsFolder = options.eventsFolder || 'events';
     this.modules = options.modules || [];
+    this.debug = options.debug || false;
+
+    Store.$client = this;
 
     this.loadModule('commands');
     this.loadModule('events');
@@ -49,10 +56,14 @@ export class MuseClient extends Client {
 
     this.modules.forEach((module) => {
       if ('module' in module) {
-        new (module.module as ModuleConstructor)(this, ...module.args);
+        new (module.module as ModuleConstructor)(...module.args);
       } else {
-        new (module as ModuleConstructor)(this);
+        new (module as ModuleConstructor)();
       }
     });
+  }
+
+  get $debug() {
+    return this.debug;
   }
 }
