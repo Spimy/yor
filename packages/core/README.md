@@ -6,7 +6,7 @@ Behind the scenes, this automatically handles commands and events. In other word
 
 ## Example Bot
 
-Check the [Example Bot on GitHub](https://github.com/Spimy/muse/tree/main/packages/external) to get a full look.
+Check the [Example Bot on GitHub](https://github.com/Spimy/muse/tree/main/packages/example) to get a full look.
 
 ```ts
 require('dotenv').config();
