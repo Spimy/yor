@@ -1,4 +1,4 @@
-import { Store } from './store';
+import { Store } from '../store';
 import { Message, PermissionResolvable } from 'discord.js';
 
 export interface CommandInfo {
@@ -18,7 +18,7 @@ export abstract class BaseCommand {
   abstract execute(message: Message): Promise<void>;
 
   get $info(): CommandInfo {
-    return { ...this.info };
+    return this.info;
   }
 }
 
