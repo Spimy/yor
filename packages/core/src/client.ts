@@ -5,9 +5,9 @@ import { Store } from './lib/store';
 import path from 'path';
 import glob from 'glob';
 
-export type MuseClientModules = 'commands' | 'events';
+export type YorClientModules = 'commands' | 'events';
 
-export interface MuseClientOptions extends ClientOptions {
+export interface YorClientOptions extends ClientOptions {
   root: string;
   commandsFolder?: string;
   eventsFolder?: string;
@@ -15,14 +15,14 @@ export interface MuseClientOptions extends ClientOptions {
   debug?: boolean;
 }
 
-export class MuseClient extends Client {
+export class YorClient extends Client {
   private root: string;
   private commandsFolder: string;
   private eventsFolder: string;
   private modules: Module[];
   private debug: boolean;
 
-  constructor(options: MuseClientOptions) {
+  constructor(options: YorClientOptions) {
     super(options);
 
     this.root = options.root;
@@ -39,7 +39,7 @@ export class MuseClient extends Client {
     this.installExternalModules();
   }
 
-  private loadModule(module: MuseClientModules) {
+  private loadModule(module: YorClientModules) {
     const folder =
       module === 'commands' ? this.commandsFolder : this.eventsFolder;
     const folderPath = path.join(this.root, folder);

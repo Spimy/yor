@@ -1,9 +1,9 @@
 require('dotenv').config();
-import { MuseClient } from '@muse/core';
-import { CommandExecutor } from '@muse/commands';
+import { YorClient } from '@yor/core';
+import { CommandExecutor } from '@yor/commands';
 
 async function bootstrap() {
-  const client = new MuseClient({
+  const client = new YorClient({
     intents: ['GUILD_MESSAGES', 'GUILDS', 'GUILD_MEMBERS'],
     root: __dirname,
     modules: [

@@ -1,4 +1,4 @@
-import { Event, BaseEvent } from '@muse/core';
+import { Event, BaseEvent } from '@yor/core';
 
 @Event('ready')
 export default class extends BaseEvent {

@@ -1,4 +1,4 @@
-import { Command, BaseCommand, Store } from '@muse/core';
+import { Command, BaseCommand, Store } from '@yor/core';
 import { Message } from 'discord.js';
 
 @Command()

@@ -1,6 +1,6 @@
-# Muse Commands
+# Yor Commands
 
-This is an external module for [Muse Core](https://github.com/Spimy/muse/tree/main/packages/core) that handles the event for executing a command.
+This is an external module for [Yor Core](https://github.com/Spimy/yor/tree/main/packages/core) that handles the event for executing a command.
 
 If you need more control over how commands are executed in your `messageCreate` event, it is highly recommended that you handle your own event listener for this task.
 
@@ -8,11 +8,11 @@ If you need more control over how commands are executed in your `messageCreate` 
 
 ```ts
 require('dotenv').config();
-import { MuseClient } from '@muse/core';
-import { CommandExecutor } from '@muse/commands';
+import { YorClient } from '@yor/core';
+import { CommandExecutor } from '@yor/commands';
 
 async function bootstrap() {
-  const client = new MuseClient({
+  const client = new YorClient({
     intents: ['GUILD_MESSAGES', 'GUILDS', 'GUILD_MEMBERS'],
     root: __dirname,
     modules: [

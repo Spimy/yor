@@ -1,9 +1,9 @@
 import { Collection } from 'discord.js';
 import { CommandData, BaseCommand } from './handlers/command';
-import { MuseClient } from '../client';
+import { YorClient } from '../client';
 
 class GlobalStore {
-  private client: MuseClient;
+  private client: YorClient;
   private prefix: string = '!';
   private commands: Collection<string, CommandData> = new Collection();
   private aliases: Collection<string, string> = new Collection();
@@ -12,7 +12,7 @@ class GlobalStore {
     return this.client;
   }
 
-  set $client(client: MuseClient) {
+  set $client(client: YorClient) {
     this.client = client;
   }
 

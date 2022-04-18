@@ -4,7 +4,7 @@ import {
   ModuleWithArgument,
   Event,
   BaseEvent
-} from '@muse/core';
+} from '@yor/core';
 import { Message } from 'discord.js';
 
 export type CommandType = 'classic';
