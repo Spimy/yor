@@ -8,6 +8,14 @@
   "devDependencies": {
     "lerna": "^4.0.0"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Spimy/muse.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Spimy/muse/issues"
+  },
+  "homepage": "https://github.com/Spimy/muse#readme",
   "publishConfig": {
     "access": "public"
   },
@@ -16,5 +24,10 @@
   ],
   "scripts": {
     "dev": "lerna run dev --stream"
-  }
+  },
+  "keywords": [
+    "discord.js",
+    "discord",
+    "bot"
+  ]
 }
