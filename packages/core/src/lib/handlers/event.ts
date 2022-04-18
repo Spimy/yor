@@ -1,5 +1,4 @@
-import { ClientEvents } from 'discord.js';
-import { EventEmitter } from 'stream';
+import { ClientEvents } from '../../index';
 import { Store } from '../store';
 
 export abstract class BaseEvent {

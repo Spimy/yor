@@ -1,5 +1,5 @@
 import { Store } from '../store';
-import { Message, PermissionResolvable } from 'discord.js';
+import { Message, PermissionResolvable } from '../../index';
 
 export interface CommandInfo {
   name: string;

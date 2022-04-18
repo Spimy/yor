@@ -1,6 +1,6 @@
-import { Collection } from 'discord.js';
 import { CommandData, BaseCommand } from './handlers/command';
 import { YorClient } from '../client';
+import { Collection } from '../index';
 
 class GlobalStore {
   private client: YorClient;
