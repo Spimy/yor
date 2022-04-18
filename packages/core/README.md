@@ -30,8 +30,7 @@ bootstrap();
 
 ```ts
 // src/commands/test.ts
-import { Command, BaseCommand } from '@yor/core';
-import { Message } from 'discord.js';
+import { Command, BaseCommand, Message } from '@yor/core';
 
 @Command()
 export default class extends BaseCommand {
@@ -76,8 +75,7 @@ Make sure the external module project has `@yor/core` as dependency.
 
 ```ts
 // External command example
-import { BaseModule, Command, BaseCommand } from '@yor/core';
-import { Message } from 'discord.js';
+import { BaseModule, Command, BaseCommand, Message } from '@yor/core';
 
 export class ModuleCommand extends BaseModule {
   constructor() {
