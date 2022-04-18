@@ -1,5 +1,5 @@
 {
-  "name": "muse",
+  "name": "yor",
   "private": false,
   "version": "1.0.0",
   "main": "index.js",
@@ -10,12 +10,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Spimy/muse.git"
+    "url": "git+https://github.com/Spimy/yor.git"
   },
   "bugs": {
-    "url": "https://github.com/Spimy/muse/issues"
+    "url": "https://github.com/Spimy/yor/issues"
   },
-  "homepage": "https://github.com/Spimy/muse#readme",
+  "homepage": "https://github.com/Spimy/yor#readme",
   "publishConfig": {
     "access": "public"
   },
