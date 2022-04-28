@@ -6,9 +6,13 @@ async function bootstrap() {
   const client = new YorClient({
     intents: ['GUILD_MESSAGES', 'GUILDS', 'GUILD_MEMBERS'],
     root: __dirname,
+    slashCommand: {
+      enable: true
+    },
     modules: [
       CommandExecutor.create({
-        type: 'classic'
+        type: 'both',
+        defer: true
       })
     ],
     debug: true
