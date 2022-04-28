@@ -1,42 +1,40 @@
-import {
-  BaseModule,
-  Store,
-  ModuleWithArgument,
-  Event,
-  BaseEvent,
-  Message
-} from '@yor/core';
+import { BaseModule, Store, ModuleWithArgument } from '@yor/core';
 
-export type CommandType = 'classic';
+export type CommandType = 'classic' | 'slash' | 'both';
 
 export interface CommandExecutorOptions {
   type: CommandType;
   prefix?: string;
+  defer?: boolean;
 }
 
+export interface CommandExecutorStoreOptions {
+  defer?: boolean;
+}
+
+export const CommandExecutorStore: CommandExecutorStoreOptions = {
+  defer: false
+};
+
 export class CommandExecutor extends BaseModule {
-  constructor({ type, prefix }: CommandExecutorOptions) {
+  constructor({ type, prefix, defer }: CommandExecutorOptions) {
     super();
     Store.$prefix = prefix || Store.$prefix;
+    CommandExecutorStore.defer = defer || false;
 
-    if (type === 'classic') {
-      @Event('messageCreate')
-      class ReadyEvent extends BaseEvent {
-        async execute(message: Message): Promise<void> {
-          if (message.author.bot) return;
-          if (message.channel.type === 'DM') return;
-          if (!message.content.startsWith(Store.$prefix)) return;
-
-          const cmd = message.content.slice(1);
-          const args = message.content
-            .slice(Store.$prefix.length + cmd.length)
-            .split(' ');
-          const command = Store.getCommand(cmd.toLowerCase());
-          await command?.execute(message, args);
-          return;
-        }
+    switch (type) {
+      case 'classic': {
+        require('./events/message-create');
+        break;
       }
-      return;
+      case 'slash': {
+        require('./events/interaction-create');
+        break;
+      }
+      case 'both': {
+        require('./events');
+        break;
+      }
     }
   }
 
