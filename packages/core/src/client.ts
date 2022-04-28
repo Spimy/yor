@@ -1,4 +1,6 @@
 import { Client, ClientOptions } from 'discord.js';
+import { REST } from '@discordjs/rest';
+import { Routes } from 'discord-api-types/v9';
 import { Module, ModuleConstructor } from './lib/module';
 import { Store } from './lib/store';
 
@@ -7,8 +9,14 @@ import glob from 'glob';
 
 export type YorClientModules = 'commands' | 'events';
 
+export interface SlashCommandConfig {
+  enable: boolean;
+  guildId?: string;
+}
+
 export interface YorClientOptions extends ClientOptions {
   root: string;
+  slashCommand?: SlashCommandConfig;
   commandsFolder?: string;
   eventsFolder?: string;
   modules?: Module[];
@@ -17,6 +25,7 @@ export interface YorClientOptions extends ClientOptions {
 
 export class YorClient extends Client {
   private root: string;
+  private slashCommand: SlashCommandConfig;
   private commandsFolder: string;
   private eventsFolder: string;
   private modules: Module[];
@@ -26,6 +35,7 @@ export class YorClient extends Client {
     super(options);
 
     this.root = options.root;
+    this.slashCommand = options.slashCommand || { enable: false };
     this.commandsFolder = options.commandsFolder || 'commands';
     this.eventsFolder = options.eventsFolder || 'events';
     this.modules = options.modules || [];
@@ -37,6 +47,10 @@ export class YorClient extends Client {
     this.loadModule('events');
 
     this.installExternalModules();
+
+    if (this.slashCommand.enable) {
+      this.registerSlashCommands();
+    }
   }
 
   private loadModule(module: YorClientModules) {
@@ -59,6 +73,45 @@ export class YorClient extends Client {
         new (module.module as ModuleConstructor)(...module.args);
       } else {
         new (module as ModuleConstructor)();
+      }
+    });
+  }
+
+  private registerSlashCommands() {
+    this.on('ready', async () => {
+      const slashCommands = Store.$commands.filter((cmd) => cmd.isSlash);
+      const rest = new REST({ version: '9' }).setToken(this.token);
+
+      if (!slashCommands.size) {
+        console.warn(
+          "You have not created any slash commands. Make sure 'isSlash' property is set to true for the slash command."
+        );
+      }
+
+      try {
+        if (typeof this.slashCommand.guildId !== 'undefined') {
+          await rest.put(
+            Routes.applicationGuildCommands(
+              this.user.id,
+              this.slashCommand.guildId
+            ),
+            {
+              body: slashCommands
+            }
+          );
+          console.log(
+            `Successfully registered application commands for guild ${this.slashCommand.guildId}.`
+          );
+        } else {
+          await rest.put(Routes.applicationCommands(this.user.id), {
+            body: slashCommands
+          });
+          console.log(
+            "Successfully registered application commands for all guilds that have 'application.commands' scope authorized for your bot."
+          );
+        }
+      } catch (error) {
+        console.error(error);
       }
     });
   }

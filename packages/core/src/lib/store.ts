@@ -38,6 +38,7 @@ class GlobalStore {
 
     this.commands.set(commandInfo.name, {
       ...commandInfo,
+      isSlash: commandInfo.isSlash || false,
       execute: command.execute
     });
 

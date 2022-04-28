@@ -1,23 +1,31 @@
 import { Store } from '../store';
-import { Message, PermissionResolvable } from 'discord.js';
+import {
+  ChatInputApplicationCommandData,
+  CommandInteraction,
+  Message,
+  PermissionResolvable
+} from 'discord.js';
 
 export interface CommandInfo {
   name: string;
   aliases?: string[];
-  description?: string;
+  description: string;
   permissions?: PermissionResolvable[];
+  isSlash?: boolean;
 }
 
+export type CommandArg = Message | CommandInteraction;
+
 export interface CommandData extends CommandInfo {
-  execute: (message: Message, args?: string[]) => Promise<void>;
+  execute: (commandArg: CommandArg, args?: string[]) => Promise<boolean>;
 }
 
 export abstract class BaseCommand {
-  constructor(private info: CommandInfo) {}
+  constructor(private info: CommandInfo & ChatInputApplicationCommandData) {}
 
-  abstract execute(message: Message, args?: string[]): Promise<void>;
+  abstract execute(message: CommandArg, args?: string[]): Promise<boolean>;
 
-  get $info(): CommandInfo {
+  get $info(): CommandInfo & ChatInputApplicationCommandData {
     return this.info;
   }
 }
