@@ -17,11 +17,29 @@ async function bootstrap() {
     root: __dirname,
     modules: [
       CommandExecutor.create({
-        type: 'classic' // 'classic' is the only available type right now and 'slash' will be implemented later
+        type: 'classic' // 'classic', 'slash', 'both'
       })
     ]
   });
   await client.login(process.env.TOKEN);
 }
 bootstrap();
+```
+
+## Available Options
+
+Aside from being able to specify the `type` of command the module should handle, there are other options.
+
+One of them is the ability to set the prefix that is used for `classic` type of command. It is by default set to `!` by [@yor/core](https://github.com/Spimy/yor/tree/main/packages/core/).
+
+The last one is whether or not the slash command executor should defer the interaction or not. This is set to `false` by default.
+
+Here's an example of how it'll look like with all options being used:
+
+```ts
+CommandExecutor.create({
+  type: 'classic', // 'classic', 'slash', 'both'
+  prefix: '>',
+  defer: true
+});
 ```

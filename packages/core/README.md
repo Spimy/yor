@@ -19,7 +19,12 @@ async function bootstrap() {
     commandsFolder: 'commands', // optional: path the commands folder or name of the folder if located in src root
     eventsFolder: 'events', // optional: path the events folder or name of the folder if located in src root
     debug: true, // optional: log commands and events that are loaded
-    modules: [] // optional: load external modules that users have created and published
+    modules: [], // optional: load external modules that users have created and published
+    slashCommand: {
+      // optional: undefined by default
+      enable: true, // required if the 'slashCommand' option is used
+      guildId: '<guild_id>' // optional: if not specified, slash commands will be loaded for all guilds that authorized the 'application.commands' scope for the bot
+    }
   });
   await client.login(process.env.TOKEN);
 }
@@ -27,6 +32,12 @@ bootstrap();
 ```
 
 ## Commands
+
+The commands should return a `boolean` value. This can then be used to handle errors more easily.
+
+If the command returns `true` then it should be considered successfully executed or `false` otherwise.
+
+### Classic command
 
 ```ts
 // src/commands/test.ts
@@ -44,6 +55,31 @@ export default class extends BaseCommand {
 
   async execute(message: Message) {
     message.channel.send('test');
+    return true;
+  }
+}
+```
+
+### Slash command
+
+```ts
+// src/commands/slash/test.ts
+import { Command, BaseCommand, CommandInteraction } from '@yor/core';
+
+@Command()
+export default class extends BaseCommand {
+  constructor() {
+    super({
+      name: 'test',
+      description: 'A test command that simply sends test back to the user.',
+      isSlash: true // VERY IMPORTANT!!
+    });
+  }
+
+  async execute(interaction: CommandInteraction) {
+    await interaction.deferReply();
+    await interaction.followUp('test');
+    return true;
   }
 }
 ```
@@ -56,9 +92,8 @@ import { Event, BaseEvent } from '@yor/core';
 
 @Event('ready')
 export default class extends BaseEvent {
-  async execute(): Promise<void> {
+  async execute() {
     console.log('I am ready.');
-    return;
   }
 }
 ```
