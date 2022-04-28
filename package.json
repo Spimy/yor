@@ -23,7 +23,7 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "lerna run dev --stream"
+    "dev": "lerna run dev --parallel"
   },
   "keywords": [
     "discord.js",
