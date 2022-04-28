@@ -2,7 +2,7 @@ import { ClientEvents } from 'discord.js';
 import { Store } from '../store';
 
 export abstract class BaseEvent {
-  abstract execute(...args: any[]): Promise<void>;
+  abstract execute(...args: any[]): Promise<any>;
 }
 
 export function Event(event: keyof ClientEvents) {
