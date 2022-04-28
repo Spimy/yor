@@ -16,5 +16,6 @@ export default class extends BaseCommand {
         .map((guild) => `**${guild.name}**: ${guild.id}`)
         .join('\n')
     );
+    return true;
   }
 }
