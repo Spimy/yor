@@ -1,9 +1,9 @@
 import { ComponentType } from './cli';
+import { getCommand } from '../components/command';
 import { mkdir, copySync, writeFileSync, existsSync } from 'fs-extra';
 
 import path from 'path';
 import chalk from 'chalk';
-import { getCommand } from '../components/command';
 
 export abstract class BaseHandler {
   createProject(name: string) {
