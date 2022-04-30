@@ -63,6 +63,10 @@ export abstract class BaseHandler {
 
     const commandeCode = getCommand(componentName);
     this.writeFileSyncRecursive(dest, commandeCode);
+
+    console.log(
+      `${chalk.green('✔️ Success:')} Generated command '${file}' successfully.`
+    );
   }
 
   private writeFileSyncRecursive(componentPath: string, content: string) {
