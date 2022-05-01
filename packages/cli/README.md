@@ -38,6 +38,4 @@ At the time of writing this, `generate` does not work in this way yet.
 
 This is the interactive way. If you do not provide any options, you will be immediately greeted interactively. Simply running `yor` is enough.
 
-At the time of writing this, you can only generate a `command` component. The option to generate an `event` component is available but will not do anything yet.
-
 ![Interactive CLI Preview](https://raw.githubusercontent.com/Spimy/yor/main/packages/cli/assets/interactive-cli.png)
