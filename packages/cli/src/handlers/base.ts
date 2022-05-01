@@ -1,5 +1,6 @@
 import { ComponentType } from './cli';
 import { getCommand } from '../components/command';
+import { getEvent } from '../components/event';
 import { mkdir, copySync, writeFileSync, existsSync } from 'fs-extra';
 
 import path from 'path';
@@ -40,6 +41,8 @@ export abstract class BaseHandler {
 
     if (component === 'command') {
       this.generateCommand(name);
+    } else {
+      this.generateEvent(name);
     }
   }
 
@@ -69,6 +72,33 @@ export abstract class BaseHandler {
     );
   }
 
+  private generateEvent(name: string) {
+    const componentName = this.toKebabCase(name.split('/').pop());
+    const eventName = this.toCamelCase(name.split('/').pop());
+    const subfolderCounter = name.split('/').length;
+    let file: string;
+
+    if (subfolderCounter >= 2) {
+      const category = name.split('/').slice(0, name.split('/').length - 1);
+      file = path.join(...category, `${componentName}.ts`);
+    } else {
+      file = `${componentName}.ts`;
+    }
+
+    const dest = path.join(process.cwd(), 'src', 'events', file);
+    if (existsSync(dest)) {
+      console.error(`${chalk.redBright('× Error:')} Component already exist.`);
+      process.exit(1);
+    }
+
+    const eventCode = getEvent(eventName);
+    this.writeFileSyncRecursive(dest, eventCode);
+
+    console.log(
+      `${chalk.green('✔️ Success:')} Generated event '${file}' successfully.`
+    );
+  }
+
   private writeFileSyncRecursive(componentPath: string, content: string) {
     const folders = componentPath.split(path.sep).slice(0, -1);
     if (folders.length) {
@@ -84,12 +114,28 @@ export abstract class BaseHandler {
     writeFileSync(componentPath, content, 'utf-8');
   }
 
+  // Credit for toKebabCase and toCamelCase: https://github.com/30-seconds/30-seconds-of-code/
   private toKebabCase(str: string) {
-    return str
-      .match(
-        /[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g
-      )!
-      .map((x) => x.toLowerCase())
-      .join('-');
+    return (
+      str &&
+      str
+        .match(
+          /[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g
+        )!
+        .map((x) => x.toLowerCase())
+        .join('-')
+    );
+  }
+
+  private toCamelCase(str: string) {
+    const s =
+      str &&
+      str
+        .match(
+          /[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g
+        )
+        .map((x) => x.slice(0, 1).toUpperCase() + x.slice(1).toLowerCase())
+        .join('');
+    return s.slice(0, 1).toLowerCase() + s.slice(1);
   }
 }
