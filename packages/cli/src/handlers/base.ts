@@ -48,7 +48,7 @@ export abstract class BaseHandler {
     const subfolderCounter = name.split('/').length;
 
     if (subfolderCounter >= 2) {
-      const category = name.split('/').slice(0, name.split('/').length - 1);
+      const category = name.split('/').slice(0, -1);
       file = path.join(...category, `${componentName}.ts`);
     } else {
       file = `${componentName}.ts`;
