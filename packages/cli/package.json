@@ -52,6 +52,9 @@
     "bot",
     "command",
     "handler",
-    "boilerplate"
+    "boilerplate",
+    "cli",
+    "command-line-interface",
+    "utility"
   ]
 }
