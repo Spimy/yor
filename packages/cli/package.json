@@ -18,7 +18,7 @@
   "bugs": {
     "url": "https://github.com/Spimy/yor/issues"
   },
-  "homepage": "https://github.com/Spimy/yor/tree/main/packages/commands#readme",
+  "homepage": "https://github.com/Spimy/yor/tree/main/packages/cli#readme",
   "scripts": {
     "build": "rm -rf -f dist && tsc",
     "dev": "tsc -w"
