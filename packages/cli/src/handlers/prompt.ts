@@ -3,7 +3,18 @@ import clear from 'clear';
 import figlet from 'figlet';
 import inquirer from 'inquirer';
 import { BaseHandler } from './base';
-import { ComponentType, componentTypes, Operation, operations } from './cli';
+import { ComponentType, componentTypes } from './cli';
+
+export const operations = [
+  'Create new project',
+  'Generate new component'
+] as const;
+export type Operation = typeof operations[number];
+
+export interface Component {
+  type: ComponentType;
+  name: string;
+}
 
 export class PromptHandler extends BaseHandler {
   public async display() {
@@ -39,11 +50,6 @@ export class PromptHandler extends BaseHandler {
 
   private async promptGenerateOperations() {
     const prompt = inquirer.createPromptModule();
-
-    interface Component {
-      type: ComponentType;
-      name: string;
-    }
 
     return <Component>await prompt([
       {

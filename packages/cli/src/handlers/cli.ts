@@ -1,12 +1,6 @@
 import { YargsHandler } from './yargs';
 import { PromptHandler } from './prompt';
 
-export const operations = [
-  'Create new project',
-  'Generate new component'
-] as const;
-export type Operation = typeof operations[number];
-
 export const componentTypes = ['command', 'event'] as const;
 export type ComponentType = typeof componentTypes[number];
 
