@@ -22,17 +22,23 @@ or
 yor -n <project-name>
 ```
 
-2. Generate new component (command / event):
+2. Generate new command:
 
 ```bash
-yor --generate command <command-name>
+yor --command <command-name>
 or
-yor -g event <event-name>
+yor -c <command-name>
+```
+
+3. Generate new event:
+
+```bash
+yor --event <event-name>
+or
+yor -e <event-name>
 ```
 
 There is no validation for the event name. It can be named anything so when you go into the file itself, you may need to change the event yourself.
-
-At the time of writing this, `generate` does not work in this way yet.
 
 ### Second way
 
