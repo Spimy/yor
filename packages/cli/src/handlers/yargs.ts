@@ -1,6 +1,11 @@
 import yargs from 'yargs';
-import { CLIArguments } from './cli';
 import { BaseHandler } from './base';
+
+export interface CLIArguments {
+  new?: string;
+  command?: string;
+  event?: string;
+}
 
 export class YargsHandler extends BaseHandler {
   private args: CLIArguments;
@@ -12,14 +17,18 @@ export class YargsHandler extends BaseHandler {
         alias: 'n',
         description: 'Create a new yor project'
       })
-      .option('generate', {
-        alias: 'g',
-        description: 'Generate a new yor component'
+      .option('command', {
+        alias: 'c',
+        description: 'Generate a new command component'
+      })
+      .option('event', {
+        alias: 'e',
+        description: 'Generate a new event component'
       }).argv;
   }
 
   hasArgs() {
-    return this.args.new || this.args.generate;
+    return this.args.new || this.args.command || this.args.event;
   }
 
   getArg(arg: keyof CLIArguments) {
