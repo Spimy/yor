@@ -39,44 +39,13 @@ export abstract class BaseHandler {
       process.exit(1);
     }
 
-    if (component === 'command') {
-      this.generateCommand(name);
-    } else {
-      this.generateEvent(name);
-    }
-  }
-
-  private generateCommand(name: string) {
-    const componentName = this.toKebabCase(name.split('/').pop());
-    const subfolderCounter = name.split('/').length;
     let file: string;
+    const isCommand = component === 'command';
 
-    if (subfolderCounter >= 2) {
-      const category = name.split('/').slice(0, name.split('/').length - 1);
-      file = path.join(...category, `${componentName}.ts`);
-    } else {
-      file = `${componentName}.ts`;
-    }
-
-    const dest = path.join(process.cwd(), 'src', 'commands', file);
-    if (existsSync(dest)) {
-      console.error(`${chalk.redBright('× Error:')} Component already exist.`);
-      process.exit(1);
-    }
-
-    const commandeCode = getCommand(componentName);
-    this.writeFileSyncRecursive(dest, commandeCode);
-
-    console.log(
-      `${chalk.green('✔️ Success:')} Generated command '${file}' successfully.`
-    );
-  }
-
-  private generateEvent(name: string) {
-    const componentName = this.toKebabCase(name.split('/').pop());
+    // Event name won't matter if the component is a command
     const eventName = this.toCamelCase(name.split('/').pop());
+    const componentName = this.toKebabCase(name.split('/').pop());
     const subfolderCounter = name.split('/').length;
-    let file: string;
 
     if (subfolderCounter >= 2) {
       const category = name.split('/').slice(0, name.split('/').length - 1);
@@ -85,21 +54,24 @@ export abstract class BaseHandler {
       file = `${componentName}.ts`;
     }
 
-    const dest = path.join(process.cwd(), 'src', 'events', file);
+    const dest = path.join(process.cwd(), 'src', `${component}s`, file);
     if (existsSync(dest)) {
       console.error(`${chalk.redBright('× Error:')} Component already exist.`);
       process.exit(1);
     }
 
-    const eventCode = getEvent(eventName);
-    this.writeFileSyncRecursive(dest, eventCode);
+    const code = isCommand ? getCommand(componentName) : getEvent(eventName);
+    this.generateComponentFile(dest, code);
 
     console.log(
-      `${chalk.green('✔️ Success:')} Generated event '${file}' successfully.`
+      `${chalk.green(
+        '✔️ Success:'
+      )} Generated ${component} '${file}' successfully.`
     );
+    process.exit(0);
   }
 
-  private writeFileSyncRecursive(componentPath: string, content: string) {
+  private generateComponentFile(componentPath: string, content: string) {
     const folders = componentPath.split(path.sep).slice(0, -1);
     if (folders.length) {
       // Create folder path if it doesn't exist
