@@ -5,7 +5,7 @@
 ```bash
 npm install -g @yor/cli
 or
-yarn add global @yor/cli
+yarn global add @yor/cli
 ```
 
 ## Commands
