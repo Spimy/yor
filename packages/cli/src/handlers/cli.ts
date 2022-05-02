@@ -1,11 +1,6 @@
 import { YargsHandler } from './yargs';
 import { PromptHandler } from './prompt';
 
-export interface CLIArguments {
-  new?: string;
-  generate?: string;
-}
-
 export const operations = [
   'Create new project',
   'Generate new component'
@@ -28,6 +23,18 @@ export class CLIHandler {
     const projectName = yargs.getArg('new');
     if (projectName) {
       yargs.createProject(projectName);
+      return;
+    }
+
+    const commandName = yargs.getArg('command');
+    if (commandName) {
+      yargs.generateComponent(commandName, 'command');
+      return;
+    }
+
+    const eventName = yargs.getArg('event');
+    if (commandName) {
+      yargs.generateComponent(eventName, 'event');
       return;
     }
   }
