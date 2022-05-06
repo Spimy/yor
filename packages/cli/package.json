@@ -7,7 +7,8 @@
     "yor": "dist/index.js"
   },
   "files": [
-    "/dist"
+    "/dist",
+    "/template"
   ],
   "license": "MIT",
   "author": "Spimy",
