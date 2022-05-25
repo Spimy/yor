@@ -48,7 +48,7 @@ This is the interactive way. If you do not provide any options, you will be imme
 
 ### Changelog
 
-#### v1.0.5
+#### v1.0.6
 
 - Fixes an issue whereby absolute path was being used on UNIX based OS
 - Fixes an issue whereby generating event component was not working
