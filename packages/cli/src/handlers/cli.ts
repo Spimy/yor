@@ -27,7 +27,7 @@ export class CLIHandler {
     }
 
     const eventName = yargs.getArg('event');
-    if (commandName) {
+    if (eventName) {
       yargs.generateComponent(eventName, 'event');
       return;
     }
