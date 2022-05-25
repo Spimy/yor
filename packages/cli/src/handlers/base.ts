@@ -54,7 +54,7 @@ export abstract class BaseHandler {
       file = `${componentName}.ts`;
     }
 
-    const dest = path.join(process.cwd(), 'src', `${component}s`, file);
+    const dest = path.relative(process.cwd(), path.join(process.cwd(), 'src', `${component}s`, file));
     if (existsSync(dest)) {
       console.error(`${chalk.redBright('× Error:')} Component already exist.`);
       process.exit(1);
