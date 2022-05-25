@@ -45,3 +45,10 @@ There is no validation for the event name. It can be named anything so when you 
 This is the interactive way. If you do not provide any options, you will be immediately greeted interactively. Simply running `yor` is enough.
 
 ![Interactive CLI Preview](https://raw.githubusercontent.com/Spimy/yor/main/packages/cli/assets/interactive-cli.png)
+
+### Changelog
+
+#### v1.0.5
+
+- Fixes an issue whereby absolute path was being used on UNIX based OS
+- Fixes an issue whereby generating event component was not working
