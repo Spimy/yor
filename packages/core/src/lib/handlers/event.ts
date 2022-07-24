@@ -7,7 +7,7 @@ export abstract class BaseEvent {
 
 export function Event(event: keyof ClientEvents) {
   return (target: { new (): BaseEvent }) => {
-    if (Store.$client.$debug) console.log(`Loaded event: ${event}`);
+    if (Store.$client.$debug) console.log(`Loaded event: ${event}.`);
     Store.$client.on(event, new target().execute);
   };
 }

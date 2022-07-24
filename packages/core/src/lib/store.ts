@@ -49,7 +49,7 @@ class GlobalStore {
     if (Store.$client.$debug)
       console.log(
         `Loaded command: ${commandInfo.name}.${
-          commandInfo.aliases ? ` Aliases: [${commandInfo.aliases}]` : ''
+          commandInfo.aliases ? ` Aliases: [${commandInfo.aliases}].` : ''
         }`
       );
   }
