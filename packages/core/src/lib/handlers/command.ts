@@ -9,8 +9,10 @@ import {
 export interface CommandInfo {
   name: string;
   aliases?: string[];
+  usage?: string;
   description: string;
   permissions?: PermissionResolvable[];
+  category?: string;
   isSlash?: boolean;
 }
 
